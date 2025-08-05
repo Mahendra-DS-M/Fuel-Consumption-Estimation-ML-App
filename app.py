@@ -205,5 +205,7 @@ if st.session_state['sbutton'] == True:
             "Fuel Type": fueltype,
             "CO2 Emissions(g/km)": co2,
             "CO2 Rating": co2r,
-            "Smog Rating": smogr
+            "Smog Rating": smogr,
+            "Fuel Consumption (City (L/100 km)": fuelconsumption
         })
+
