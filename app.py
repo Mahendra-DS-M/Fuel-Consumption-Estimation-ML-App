@@ -29,6 +29,7 @@ with open("Pickles/Vehicle Class_encoding.pkl", 'rb') as f:
 data = pd.read_csv("Input.csv")
 
 ############################# Fire Base ##############################
+import firebase_admin
 from firebase_admin import credentials, firestore
 
 # Loading credentials from secrets
@@ -59,7 +60,6 @@ def switch_fbutton_state():
     st.session_state['fbutton'] = True
 
 ###################################### Design of User Interface ################################
-
 st.subheader(":orange[Fuel Consumption of Vehicles:] :blue[in City (L/100km)]", divider=True)
 st.write("Fuel consumption measures the amount of fuel a car consumes to go a specific distance. It is expressed in liters per hundred kilometers. Speed, sudden acceleration, and hard braking can all lead to poorer gas mileage.")
 colx, coly, colz = st.columns([1,2,1])
@@ -210,5 +210,3 @@ if st.session_state['sbutton'] == True:
             "Smog Rating": smogr,
             "Fuel Consumption (City (L/100 km)": fuelconsumption
         })
-
-
