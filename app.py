@@ -1,18 +1,14 @@
 # Base Libraries
-
 import pandas as pd
 import time # To delay response
-
 import warnings 
 warnings.filterwarnings("ignore") # To supress warnings
 
 import streamlit as st  # UI Module
-
 import joblib # Saved Models Load Module
 import pickle # Saved Encodings Load Module
 
 ##################### Trained Model files ######################
-
 # Loading Saved model & pre-process object files
 ohe = joblib.load('Pickles/ohe.pkl')
 sc = joblib.load("Pickles/sc.pkl")
@@ -28,18 +24,12 @@ with open('Pickles/Transmission_encoding.pkl', 'rb') as f:
 with open("Pickles/Vehicle Class_encoding.pkl", 'rb') as f:
     vclass_encoding = pickle.load(f)
 
-
 ######### Sample Input Data to Show to the User ###############
-
 data = pd.read_csv("Input.csv")
-
 # Storing User Given Data
-
 userdata =  pd.read_csv("UserData.csv")
 
-
 ######################## Helper functions for Inputs #####################
-
 if 'sbutton' not in st.session_state:
     st.session_state['sbutton'] = False
 
@@ -202,5 +192,3 @@ if st.session_state['sbutton'] == True:
 
         st.balloons()
         st.subheader(f":blue[Estimated Fuel Consumption In City:] :red[{fuelconsumption}]:green[L/100Km]")
-        
-
