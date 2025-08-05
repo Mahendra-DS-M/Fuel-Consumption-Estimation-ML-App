@@ -5,10 +5,11 @@ import warnings
 warnings.filterwarnings("ignore") # To supress warnings
 
 import streamlit as st  # UI Module
+
+##################### Trained Model files ######################
 import joblib # Saved Models Load Module
 import pickle # Saved Encodings Load Module
 
-##################### Trained Model files ######################
 # Loading Saved model & pre-process object files
 ohe = joblib.load('Pickles/ohe.pkl')
 sc = joblib.load("Pickles/sc.pkl")
@@ -24,8 +25,21 @@ with open('Pickles/Transmission_encoding.pkl', 'rb') as f:
 with open("Pickles/Vehicle Class_encoding.pkl", 'rb') as f:
     vclass_encoding = pickle.load(f)
 
-######### Sample Input Data to Show to the User ###############
+############## Sample Input Data to Show to the User ###############
 data = pd.read_csv("Input.csv")
+
+############################# Fire Base ##############################
+from firebase_admin import credentials, firestore
+
+# Loading credentials from secrets
+cred = credentials.Certificate(dict(st.secrets["firebase"]))
+
+# Initialize app (only once)
+if not firebase_admin._apps:
+    firebase_admin.initialize_app(cred)
+
+# Access Firestore
+db = firestore.client()
 
 ######################## Helper functions for Inputs #####################
 if 'sbutton' not in st.session_state:
@@ -180,3 +194,16 @@ if st.session_state['sbutton'] == True:
         st.balloons()
         st.subheader(f":blue[Estimated Fuel Consumption In City:] :red[{fuelconsumption}]:green[L/100Km]")
 
+        # Saving into firebase
+        doc_ref = db.collection("UserData").document(make)
+        doc_ref.set({
+            "Make": name,
+            "Vehicle Class": vclass,
+            "Engine Size(L)": size,
+            "Cylinders": cylinders,
+            "Transmission": trans,
+            "Fuel Type": fueltype,
+            "CO2 Emissions(g/km)": co2,
+            "CO2 Rating": co2r,
+            "Smog Rating": smogr
+        })
