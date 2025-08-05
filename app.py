@@ -199,7 +199,7 @@ if st.session_state['sbutton'] == True:
         # Saving into firebase
         doc_ref = db.collection("UserData").document(make)
         doc_ref.set({
-            "Make": name,
+            "Make": make,
             "Vehicle Class": vclass,
             "Engine Size(L)": size,
             "Cylinders": cylinders,
@@ -210,3 +210,4 @@ if st.session_state['sbutton'] == True:
             "Smog Rating": smogr,
             "Fuel Consumption (City (L/100 km)": fuelconsumption
         })
+
