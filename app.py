@@ -201,7 +201,7 @@ if st.session_state['sbutton'] == True:
         doc_ref.set({
             "Make": make,
             "Vehicle Class": vclass,
-            "Engine Size(L)": size,
+            "Engine Size(L)": esize,
             "Cylinders": cylinders,
             "Transmission": trans,
             "Fuel Type": fueltype,
@@ -210,4 +210,5 @@ if st.session_state['sbutton'] == True:
             "Smog Rating": smogr,
             "Fuel Consumption (City (L/100 km)": fuelconsumption
         })
+
 
