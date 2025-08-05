@@ -26,8 +26,6 @@ with open("Pickles/Vehicle Class_encoding.pkl", 'rb') as f:
 
 ######### Sample Input Data to Show to the User ###############
 data = pd.read_csv("Input.csv")
-# Storing User Given Data
-userdata =  pd.read_csv("UserData.csv")
 
 ######################## Helper functions for Inputs #####################
 if 'sbutton' not in st.session_state:
@@ -120,10 +118,6 @@ if st.session_state['fbutton'] == True:
                 # Taking output column & adding predictions
                 df['Fuel Consumption (City (L/100 km)'] = ypred
 
-                # User Given Data With predictions added to file
-                userdata = pd.concat([userdata, df], axis=0).reset_index(drop=True)
-                userdata.to_csv("UserData.csv", index=False)
-
                 st.write(":blue[Predicted Fuel Consumptions....]")
                 st.dataframe(df)
                 st.balloons()
@@ -183,12 +177,6 @@ if st.session_state['sbutton'] == True:
 
         # Prediction
         fuelconsumption = round(float(model.predict(row)[0]),2)
-        # Taking output column & adding predictions
-        data['Fuel Consumption (City (L/100 km)'] = fuelconsumption
-
-        # User Given Data With predictions added to file
-        userdata = pd.concat([userdata, data], axis=0).reset_index(drop=True)
-        userdata.to_csv("UserData.csv", index=False)
-
         st.balloons()
         st.subheader(f":blue[Estimated Fuel Consumption In City:] :red[{fuelconsumption}]:green[L/100Km]")
+
