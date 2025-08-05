@@ -34,6 +34,8 @@ from firebase_admin import credentials, firestore
 # Loading credentials from secrets
 cred = credentials.Certificate(dict(st.secrets["firebase"]))
 
+st.write(cred)
+
 # Initialize app (only once)
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
@@ -208,4 +210,5 @@ if st.session_state['sbutton'] == True:
             "Smog Rating": smogr,
             "Fuel Consumption (City (L/100 km)": fuelconsumption
         })
+
 
