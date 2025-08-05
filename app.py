@@ -139,6 +139,7 @@ if st.session_state['fbutton'] == True:
                 csv = df.to_csv(index=False)
                 st.download_button(label="Download Above Predictions as CSV",data=csv,file_name="predictions.csv",mime="text/csv")
 
+                # Firebase
                 collection_ref = db.collection("UserData")
                 for idx, row in df.iterrows():
                     doc_data = row.to_dict()
@@ -213,6 +214,7 @@ if st.session_state['sbutton'] == True:
             "Smog Rating": smogr,
             "Fuel Consumption (City (L/100 km)": fuelconsumption
         })
+
 
 
 
